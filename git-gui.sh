@@ -3414,7 +3414,7 @@ ${NS}::frame .vpane.lower.commarea.buffer.header
 ${NS}::frame .vpane.lower.commarea.buffer.footer
 set ui_comm .vpane.lower.commarea.buffer.frame.t
 set ui_coml .vpane.lower.commarea.buffer.header.l
-set ui_comm_col .vpane.lower.commarea.buffer.footer
+set ui_comm_sel .vpane.lower.commarea.buffer.footer
 
 if {![is_enabled nocommit]} {
 	${NS}::checkbutton .vpane.lower.commarea.buffer.header.amend \
@@ -3467,20 +3467,32 @@ ${NS}::scrollbar .vpane.lower.commarea.buffer.frame.sby \
 	-orient vertical \
 	-command [list $ui_comm yview]
 
-set buff_length 0
-
-${NS}::label $ui_comm_col.cl \
+set line 0
+set col 0
+${NS}::label $ui_comm_sel.ll \
 	-anchor e \
 	-justify left \
-	-text [mc "Col: "]
-${NS}::label $ui_comm_col.bl \
+	-text [mc "Ln "]
+${NS}::label $ui_comm_sel.lb \
 	-anchor e \
 	-justify left \
-	-textvariable buff_length
-pack $ui_comm_col.bl -side right
-pack $ui_comm_col.cl -side right
+	-textvariable line
+${NS}::label $ui_comm_sel.cl \
+	-anchor e \
+	-justify left \
+	-text [mc ", Col "]
+${NS}::label $ui_comm_sel.cb \
+	-anchor e \
+	-justify left \
+	-textvariable col
+pack $ui_comm_sel.cb -side right
+pack $ui_comm_sel.cl -side right
+pack $ui_comm_sel.lb -side right
+pack $ui_comm_sel.ll -side right
 bind $ui_comm <KeyRelease> {
-	set buff_length [$ui_comm count -chars {insert display linestart} insert]
+	set pos [split [$ui_comm index insert] "."]
+	set line [lindex $pos 0]
+	set col [lindex $pos 1]
 }
 
 pack .vpane.lower.commarea.buffer.frame.sbx -side bottom -fill x
