@@ -3469,27 +3469,11 @@ ${NS}::scrollbar .vpane.lower.commarea.buffer.frame.sby \
 
 set line 0
 set col 0
-${NS}::label $ui_comm_sel.ll \
-	-anchor e \
-	-justify left \
-	-text "Ln "
-${NS}::label $ui_comm_sel.lb \
-	-anchor e \
-	-justify left \
-	-textvariable line
-${NS}::label $ui_comm_sel.cl \
-	-anchor e \
-	-justify left \
-	-text ", Col "
-${NS}::label $ui_comm_sel.cb \
-	-anchor e \
-	-justify left \
-	-textvariable col
-bind $ui_comm <KeyRelease> {
-	set pos [split [$ui_comm index insert] "."]
-	set line [lindex $pos 0]
-	set col [lindex $pos 1]
-}
+${NS}::label $ui_comm_sel.ll -text "Ln "
+${NS}::label $ui_comm_sel.lb -textvariable line
+${NS}::label $ui_comm_sel.cl -text ", Col "
+${NS}::label $ui_comm_sel.cb -textvariable col
+bind $ui_comm <KeyRelease> {lassign [split [$ui_comm index insert] "."] line col}
 pack $ui_comm_sel.cb -side right
 pack $ui_comm_sel.cl -side right
 pack $ui_comm_sel.lb -side right
