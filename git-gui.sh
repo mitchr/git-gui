@@ -3414,7 +3414,7 @@ ${NS}::frame .vpane.lower.commarea.buffer.header
 ${NS}::frame .vpane.lower.commarea.buffer.footer
 set ui_comm .vpane.lower.commarea.buffer.frame.t
 set ui_coml .vpane.lower.commarea.buffer.header.l
-set ui_comm_sel .vpane.lower.commarea.buffer.footer
+set ui_comm_pos .vpane.lower.commarea.buffer.footer
 
 if {![is_enabled nocommit]} {
 	${NS}::checkbutton .vpane.lower.commarea.buffer.header.amend \
@@ -3469,15 +3469,15 @@ ${NS}::scrollbar .vpane.lower.commarea.buffer.frame.sby \
 
 set line 0
 set col 0
-${NS}::label $ui_comm_sel.ll -text "Ln "
-${NS}::label $ui_comm_sel.lb -textvariable line
-${NS}::label $ui_comm_sel.cl -text ", Col "
-${NS}::label $ui_comm_sel.cb -textvariable col
+${NS}::label $ui_comm_pos.ll -text "Ln "
+${NS}::label $ui_comm_pos.lb -textvariable line
+${NS}::label $ui_comm_pos.cl -text ", Col "
+${NS}::label $ui_comm_pos.cb -textvariable col
 bind $ui_comm <KeyRelease> {lassign [split [$ui_comm index insert] "."] line col}
-pack $ui_comm_sel.cb -side right
-pack $ui_comm_sel.cl -side right
-pack $ui_comm_sel.lb -side right
-pack $ui_comm_sel.ll -side right
+pack $ui_comm_pos.cb -side right
+pack $ui_comm_pos.cl -side right
+pack $ui_comm_pos.lb -side right
+pack $ui_comm_pos.ll -side right
 
 pack .vpane.lower.commarea.buffer.frame.sbx -side bottom -fill x
 pack .vpane.lower.commarea.buffer.frame.sby -side right -fill y
