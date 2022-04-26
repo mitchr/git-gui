@@ -3479,11 +3479,7 @@ ${NS}::label $ui_comm_col.bl \
 	-textvariable buff_length
 pack $ui_comm_col.bl -side right
 pack $ui_comm_col.cl -side right
-bind $ui_comm <KeyPress> {
-	$ui_comm edit modified true
-	$ui_comm edit modified false
-}
-bind $ui_comm <<Modified>> {
+bind $ui_comm <KeyRelease> {
 	set buff_length [$ui_comm count -chars {insert display linestart} insert]
 }
 
