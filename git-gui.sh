@@ -3411,8 +3411,10 @@ if {![is_enabled nocommit]} {
 #
 ${NS}::frame .vpane.lower.commarea.buffer
 ${NS}::frame .vpane.lower.commarea.buffer.header
+${NS}::frame .vpane.lower.commarea.buffer.footer
 set ui_comm .vpane.lower.commarea.buffer.frame.t
 set ui_coml .vpane.lower.commarea.buffer.header.l
+set ui_comm_col .vpane.lower.commarea.buffer.footer
 
 if {![is_enabled nocommit]} {
 	${NS}::checkbutton .vpane.lower.commarea.buffer.header.amend \
@@ -3465,10 +3467,31 @@ ${NS}::scrollbar .vpane.lower.commarea.buffer.frame.sby \
 	-orient vertical \
 	-command [list $ui_comm yview]
 
+set buff_length 0
+
+${NS}::label $ui_comm_col.cl \
+	-anchor e \
+	-justify left \
+	-text [mc "Col: "]
+${NS}::label $ui_comm_col.bl \
+	-anchor e \
+	-justify left \
+	-textvariable buff_length
+pack $ui_comm_col.bl -side right
+pack $ui_comm_col.cl -side right
+bind $ui_comm <KeyPress> {
+	$ui_comm edit modified true
+	$ui_comm edit modified false
+}
+bind $ui_comm <<Modified>> {
+	set buff_length [$ui_comm count -chars {insert display linestart} insert]
+}
+
 pack .vpane.lower.commarea.buffer.frame.sbx -side bottom -fill x
 pack .vpane.lower.commarea.buffer.frame.sby -side right -fill y
 pack $ui_comm -side left -fill y
 pack .vpane.lower.commarea.buffer.header -side top -fill x
+pack .vpane.lower.commarea.buffer.footer -side bottom -fill x
 pack .vpane.lower.commarea.buffer.frame -side left -fill y
 pack .vpane.lower.commarea.buffer -side left -fill y
 
