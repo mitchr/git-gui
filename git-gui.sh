@@ -3472,7 +3472,7 @@ set col 0
 ${NS}::label $ui_comm_sel.ll \
 	-anchor e \
 	-justify left \
-	-text [mc "Ln "]
+	-text "Ln "
 ${NS}::label $ui_comm_sel.lb \
 	-anchor e \
 	-justify left \
@@ -3480,7 +3480,7 @@ ${NS}::label $ui_comm_sel.lb \
 ${NS}::label $ui_comm_sel.cl \
 	-anchor e \
 	-justify left \
-	-text [mc ", Col "]
+	-text ", Col "
 ${NS}::label $ui_comm_sel.cb \
 	-anchor e \
 	-justify left \
