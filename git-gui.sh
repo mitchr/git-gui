@@ -3485,15 +3485,15 @@ ${NS}::label $ui_comm_sel.cb \
 	-anchor e \
 	-justify left \
 	-textvariable col
-pack $ui_comm_sel.cb -side right
-pack $ui_comm_sel.cl -side right
-pack $ui_comm_sel.lb -side right
-pack $ui_comm_sel.ll -side right
 bind $ui_comm <KeyRelease> {
 	set pos [split [$ui_comm index insert] "."]
 	set line [lindex $pos 0]
 	set col [lindex $pos 1]
 }
+pack $ui_comm_sel.cb -side right
+pack $ui_comm_sel.cl -side right
+pack $ui_comm_sel.lb -side right
+pack $ui_comm_sel.ll -side right
 
 pack .vpane.lower.commarea.buffer.frame.sbx -side bottom -fill x
 pack .vpane.lower.commarea.buffer.frame.sby -side right -fill y
